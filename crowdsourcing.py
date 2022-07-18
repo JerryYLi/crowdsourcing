@@ -215,7 +215,7 @@ class CrowdDataset(object):
     """ A dataset, holding images, workers and labels.
     """
 
-    def __init__(self, debug=0, min_risk=0.005, learn_worker_params=True,
+    def __init__(self, debug=False, min_risk=0.005, learn_worker_params=True,
                  learn_image_params=True, estimate_priors_automatically=False,
                  computer_vision_predictor=None, naive_computer_vision=False,
                  add_computer_vision_to_workers=True, image_dir=None,
@@ -311,7 +311,7 @@ class CrowdDataset(object):
         old_likelihood = -np.inf
         for it in range(max_iters):
 
-            if self.debug > 1:
+            if self.debug:
                 print("Estimate params for " + self.name + ", iter " +
                       str(it + 1) + " likelihood=" + str(log_likelihood))
 
@@ -340,7 +340,7 @@ class CrowdDataset(object):
             # convergence
             log_likelihood = self.compute_log_likelihood()
             if log_likelihood <= old_likelihood:
-                if self.debug > 1:
+                if self.debug:
                     print("New likelihood=" + str(log_likelihood))
                 break
             old_likelihood = log_likelihood
