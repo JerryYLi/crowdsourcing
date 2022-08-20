@@ -53,7 +53,7 @@ class CrowdDatasetBBox(CrowdDataset):
     between annotated boxes of different workers is unknown.  Incorporates a worker skill and image difficulty model
     """
 
-    def __init__(self, **kwds):
+    def __init__(self, prob_fp_prior=0.1, prob_fn_prior=0.1, prior_sigma_prior=0.25, **kwds):
         super(CrowdDatasetBBox, self).__init__(**kwds)
         self._CrowdImageClass_ = CrowdImageBBox
         self._CrowdWorkerClass_ = CrowdWorkerBBox
@@ -63,9 +63,9 @@ class CrowdDatasetBBox(CrowdDataset):
         self.prob_fp_beta = 5
         self.prob_fn_beta = 5
         self.prior_sigma_image_v0 = 1
-        self.prior_sigma_prior = 0.25
-        self.prob_fp_prior = .1
-        self.prob_fn_prior = .1
+        self.prior_sigma_prior = prior_sigma_prior
+        self.prob_fp_prior = prob_fp_prior
+        self.prob_fn_prior = prob_fn_prior
         self.prior_sigma = self.prior_sigma_prior
         self.prob_fp = self.prob_fp_prior
         self.prob_fn = self.prob_fn_prior
